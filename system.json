@@ -35,4 +35,6 @@
   },
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": "mana"
+  "manifest": "https://raw.githubusercontent.com/antiochusblack/dungeon-crawler-carl-foundry/main/system.json",
+  "download": "https://github.com/antiochusblack/dungeon-crawler-carl-foundry/releases/download/v0.1.0/dungeon-crawler-carl-0.1.0.zip"
 }
