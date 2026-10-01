@@ -1,4 +1,4 @@
-# Dungeon Crawler Carl — unofficial Foundry prototype 0.1.0
+# Dungeon Crawler Carl — unofficial Foundry prototype 0.2.0
 
 Targets Foundry VTT 14. This is a first-pass prototype, not an official or runtime-verified release.
 
@@ -18,3 +18,12 @@ No rulebook text, artwork, content compendiums, character wizard or starter char
 
 ## Validation
 JavaScript syntax and core rule calculations checked, including all Stat Mod boundaries, degree of success and Health-slot damage example. An HTML design preview illustrates the same CSS but is not a running Foundry sheet; browser rendering verification was unavailable in this environment. Foundry runtime integration, sheet saving, item drops and token bars require in-world testing.
+
+## v0.2.0
+
+Fixes character sheet opening: actor and item template parts now render a single outer HTML element, as required by Foundry ApplicationV2. Existing controls and data fields are preserved.
+
+The repository and packaged system.json include the permanent manifest URL and version-specific release download URL. Install from:
+https://raw.githubusercontent.com/antiochusblack/dungeon-crawler-carl-foundry/main/system.json
+
+Release validation checks template root structure, JSON, declared files, package contents and core calculations. Full Foundry runtime validation still requires installing the release in a world.
