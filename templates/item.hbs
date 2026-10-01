@@ -1,3 +1,272 @@
-<div class="carl-sheet-body">
-<header class="hud"><small>WORLD DUNGEON // ITEM RECORD</small><input class="name" name="name" value="{{item.name}}"></header><div class="grid"><label>Rank<input name="system.rank" type="number" min="0" max="20" value="{{system.rank}}"></label><label>Stat<select name="system.stat">{{selectOptions stats selected=system.stat}}</select></label><label>Mana cost<input name="system.manaCost" min="0" type="number" value="{{system.manaCost}}"></label><label>Quantity<input name="system.quantity" min="0" type="number" value="{{system.quantity}}"></label><label>Damage formula<input name="system.damage" value="{{system.damage}}" placeholder="1d6"></label><label>Add Stat Mod<input name="system.damageMod" type="checkbox" {{checked system.damageMod}}></label><label>Passive<input name="system.passive" type="checkbox" {{checked system.passive}}></label><label>Hotlist<input name="system.hotlist" type="checkbox" {{checked system.hotlist}}></label></div><h2>DESCRIPTION / EFFECT</h2><textarea name="system.description">{{system.description}}</textarea><h2>REWARD</h2><textarea name="system.reward">{{system.reward}}</textarea>
-</div>
+<div class="carl-sheet-body"><header class="hud"><small>WORLD DUNGEON //
+      {{item.type}}
+      RECORD</small><input
+      class="name"
+      name="name"
+      value="{{item.name}}"
+      aria-label="Item name"
+    /></header><div class="grid">{{#if ranked}}<label>Rank<input
+          type="number"
+          name="system.rank"
+          value="{{system.rank}}"
+          min="0"
+          max="20"
+        /></label><label>Stat Mod<select name="system.stat">{{selectOptions
+            stats
+            selected=system.stat
+          }}</select></label><label>Grinding hours<input
+          type="number"
+          name="system.grindingHours"
+          value="{{system.grindingHours}}"
+          min="0"
+        /></label><label class="check"><input
+          type="checkbox"
+          name="system.used"
+          {{checked system.used}}
+        />
+        Used / advancement mark</label>{{/if}}{{#if isSkill}}<label
+      >Category<select name="system.category">{{selectOptions
+            categories
+            selected=system.category
+          }}</select></label><label>Check type<select
+          name="system.checkType"
+        >{{selectOptions
+            checkTypes
+            selected=system.checkType
+          }}</select></label><label class="check"><input
+          type="checkbox"
+          name="system.passive"
+          {{checked system.passive}}
+        />
+        Passive (no check)</label>{{/if}}{{#if isSpell}}<label
+        class="check"
+      ><input
+          type="checkbox"
+          name="system.passive"
+          {{checked system.passive}}
+        />
+        Passive (no check)</label><label>Base Mana cost<input
+          type="number"
+          name="system.manaCost"
+          value="{{system.manaCost}}"
+          min="0"
+        /></label><label>Favored Class(es)<input
+          type="text"
+          name="system.favored"
+          value="{{system.favored}}"
+        /></label><label class="check"><input
+          type="checkbox"
+          name="system.favoredApplies"
+          {{checked system.favoredApplies}}
+        />
+        My Class is Favored</label><label>Other Mana adjustment<input
+          type="number"
+          name="system.manaSurcharge"
+          value="{{system.manaSurcharge}}"
+          min="0"
+        /></label>{{/if}}{{#if isWeapon}}<label>Weapon Skill<select
+          name="system.skillId"
+        >{{selectOptions
+            skillChoices
+            selected=system.skillId
+          }}</select></label><label>Damage / fallback Stat<select
+          name="system.stat"
+        >{{selectOptions stats selected=system.stat}}</select></label><label
+      >Legacy / fallback Rank<input
+          type="number"
+          name="system.rank"
+          value="{{system.rank}}"
+          min="0"
+          max="20"
+        /></label>{{/if}}{{#if physical}}<label>Quantity<input
+          type="number"
+          name="system.quantity"
+          value="{{system.quantity}}"
+          min="0"
+        /></label><label>Weight of one item (lb)<input
+          type="number"
+          name="system.weight"
+          value="{{system.weight}}"
+          min="0"
+        /></label><label>Rarity / quality<input
+          type="text"
+          name="system.rarity"
+          value="{{system.rarity}}"
+        /></label><label>Location<select name="system.location">{{selectOptions
+            locations
+            selected=system.location
+          }}</select></label><label>Allowed gear slot<select
+          name="system.gearSlot"
+        >{{selectOptions
+            gearSlots
+            selected=system.gearSlot
+          }}</select></label><label>Holding hand<select
+          name="system.equipSlot"
+        >{{selectOptions
+            handSlots
+            selected=system.equipSlot
+          }}</select></label><label>Hands required<select
+          name="system.hands"
+        >{{selectOptions hands selected=system.hands}}</select></label><label
+      >Accessory subtype<select name="system.accessoryKind">{{selectOptions
+            accessoryKinds
+            selected=system.accessoryKind
+          }}</select></label>{{/if}}{{#if mobOwner}}<label>Mob Action difficulty<input
+          type="number"
+          name="system.difficulty"
+          value="{{system.difficulty}}"
+        /></label>{{/if}}{{#if isGear}}<label>Gear type<select
+          name="system.gearType"
+        >{{selectOptions
+            gearTypes
+            selected=system.gearType
+          }}</select></label>{{#if isScroll}}<label>Spell name<input
+            name="system.spellName"
+            value="{{system.spellName}}"
+          /></label><label>Fixed Spell Rank<input
+            type="number"
+            min="1"
+            max="20"
+            name="system.scrollRank"
+            value="{{system.scrollRank}}"
+          /></label><label>Spell Stat<select name="system.stat">{{selectOptions
+              stats
+              selected=system.stat
+            }}</select></label><label class="check"><input
+            type="checkbox"
+            name="system.passive"
+            {{checked system.passive}}
+          />
+          Passive Spell (no check)</label>{{/if}}{{#if isSpellbook}}<label
+        >Granted Spell<input
+            name="system.spellName"
+            value="{{system.spellName}}"
+          /></label><label>Granted Rank<input
+            type="number"
+            min="1"
+            max="20"
+            name="system.scrollRank"
+            value="{{system.scrollRank}}"
+          /></label>{{/if}}<label class="check"><input
+          type="checkbox"
+          name="system.consumable"
+          {{checked system.consumable}}
+        />
+        Consumable: use spends one copy</label><label>Charges (manual tracker)<input
+          type="number"
+          name="system.charges"
+          value="{{system.charges}}"
+          min="0"
+        /></label>{{/if}}{{#if damageCapable}}<label>Damage formula (current
+        Rank)<input
+          type="text"
+          name="system.damage"
+          value="{{system.damage}}"
+        /></label><label>Damage type(s)<input
+          type="text"
+          name="system.damageType"
+          value="{{system.damageType}}"
+        /></label><label class="check"><input
+          type="checkbox"
+          name="system.damageMod"
+          {{checked system.damageMod}}
+        />
+        Add Stat Mod to damage</label>{{/if}}{{#if isAbility}}<label>Action /
+        Interrupt<input
+          type="text"
+          name="system.actionType"
+          value="{{system.actionType}}"
+        /></label><label>Range / area<input
+          type="text"
+          name="system.range"
+          value="{{system.range}}"
+        /></label><label>Duration<input
+          type="text"
+          name="system.duration"
+          value="{{system.duration}}"
+        /></label><label>Cooldown<input
+          type="text"
+          name="system.cooldown"
+          value="{{system.cooldown}}"
+        /></label>{{/if}}{{#if isWeapon}}<label>Range / reach<input
+          type="text"
+          name="system.range"
+          value="{{system.range}}"
+        /></label>{{/if}}{{#if physical}}<label class="check"><input
+          type="checkbox"
+          name="system.hotlist"
+          {{checked system.hotlist}}
+        />
+        Prepared in Hotlist</label><label>Hotlist position (0 = Auto)<input
+          type="number"
+          name="system.hotlistPosition"
+          value="{{system.hotlistPosition}}"
+          min="0"
+        /></label>{{else if isAbility}}<label class="check"><input
+          type="checkbox"
+          name="system.hotlist"
+          {{checked system.hotlist}}
+        />
+        Prepared in Hotlist</label><label>Hotlist position (0 = Auto)<input
+          type="number"
+          name="system.hotlistPosition"
+          value="{{system.hotlistPosition}}"
+          min="0"
+        /></label>{{/if}}</div>{{#if physical}}<h2>EQUIPPED BONUSES</h2><p
+      class="muted"
+    >Apply only while equipped. A stack represents one equipped copy. Other
+      copies remain stored. Enter fixed bonuses here; conditional effects stay
+      in the description.</p><div class="grid">{{#each statBonuses}}<label
+        >{{label}}
+          bonus<input
+            type="number"
+            name="system.statBonuses.{{key}}"
+            value="{{value}}"
+          /></label>{{/each}}<label>DR bonus<input
+          type="number"
+          name="system.drBonus"
+          value="{{system.drBonus}}"
+        /></label><label>Evade bonus<input
+          type="number"
+          name="system.evadeBonus"
+          value="{{system.evadeBonus}}"
+        /></label><label>100% Health-slot bonus<input
+          type="number"
+          name="system.healthSlotBonus"
+          value="{{system.healthSlotBonus}}"
+        /></label></div>{{/if}}<h2>DESCRIPTION / EFFECT</h2><label
+    class="wide"
+  >Description<textarea
+      name="system.description"
+    >{{system.description}}</textarea></label>{{#if damageCapable}}<label
+      class="wide"
+    >Limitations / requirements<textarea
+        name="system.limitations"
+      >{{system.limitations}}</textarea></label>{{/if}}{{#if isAbility}}<label
+      class="wide"
+    >Rank upgrades / effects<textarea
+        name="system.upgrades"
+      >{{system.upgrades}}</textarea></label>{{/if}}{{#if identity}}<label
+      class="wide"
+    >Benefits (record Stat / Skill changes on the actor)<textarea
+        name="system.benefits"
+      >{{system.benefits}}</textarea></label><label class="wide">Selection
+      requirements<textarea
+        name="system.requirements"
+      >{{system.requirements}}</textarea></label>{{/if}}{{#if
+    achievement
+  }}<label class="wide">Reward / loot box<textarea
+        name="system.reward"
+      >{{system.reward}}</textarea></label><label>Awarded on / Floor<input
+        type="text"
+        name="system.awardedOn"
+        value="{{system.awardedOn}}"
+      /></label><label>Trigger / condition<input
+        type="text"
+        name="system.trigger"
+        value="{{system.trigger}}"
+      /></label>{{/if}}<label>Source / book reference<input
+      type="text"
+      name="system.source"
+      value="{{system.source}}"
+    /></label></div>

@@ -1,29 +1,40 @@
-# Dungeon Crawler Carl — unofficial Foundry prototype 0.2.0
+# Dungeon Crawler Carl — unofficial Foundry prototype
 
-Targets Foundry VTT 14. This is a first-pass prototype, not an official or runtime-verified release.
+Pending version: 0.3.0. Targets Foundry VTT 14. No v0.3.0 release ZIP has been built or published yet.
 
-## Install
-Extract the ZIP so the system.json file is at Data/systems/dungeon-crawler-carl/system.json. Restart Foundry and create a world using Dungeon Crawler Carl — Unofficial. Forge users can upload the extracted system folder through their hosting tools.
+## Sheets
 
-## Use
-Create a Crawler or Mob actor. Edit base Stats and enhancement bonuses; modifiers and crawler Mana maximum calculate automatically. Health is tracked in slots, not raw hit points. Crawlers have ten slots; Mobs have editable slot count and slot toughness. Token bars use Health slots and Mana.
+Crawler HUD contains Stats, Health Bar, Mana, AI Favor, Popularity, gold, Miscellaneous Junk, unspent Stat points, dying rounds and combat values. Set the button amount and use + / − to adjust resources. Click a Health slot to set current Health. Enter final damage after DR and elemental adjustments, then apply it to the Health Bar; damage consumes complete slots from right to left and discards the remainder. Individual slot bonuses can be entered under Log & Effects. Short/long rests restore resources; resolve conditions and injuries manually.
 
-Set Difficulty, roll mode, and situational bonus before clicking a Stat or ability. Evade uses DEX without Skill Rank. Skill checks use Stat Mod + Rank; rank-zero Attack/Utility checks use Disadvantage. Natural 1/20 and success/failure margins appear in chat. Mobs display fixed Action/Evade difficulties and do not roll checks.
+Skills & Spells includes Rank, Stat, check type, Passive, used/advancement marks, grinding hours, damage, range, duration, cooldown, limitations and upgrades. Spells default to INT; Favored Class mismatch adds one Mana. Passive spells spend Mana without making a check. Spells cannot be cast untrained and must be in the Hotlist for casting during an active combat. Damage formulas represent the current Rank's total dice; Rank upgrades and critical effects are manual. Rank 16+ benefits require Floor 6. The RPG uses Levels, not XP. Level gains and Stat-point allocation are manual.
 
-Add items from sheet buttons or drag existing Items onto the sheet. Edit their Rank, Stat, Mana cost, damage formula and description. Clicking a Spell spends Mana and rolls its check; use Passive for a spell that only posts its effect. Damage rolls are separate and use the entered formula, with optional Stat Mod. Set the formula to the correct total dice for the current Rank. Item deletion uses the item sheet header controls.
+Weapons may link to an owned Weapon Skill for attack Rank and Stat. Existing manual/legacy weapon attack fields remain usable. Mobs use fixed Action, Evade and Surprise difficulties; ability entries include a fixed Action difficulty and damage formula, rather than rolling d20 checks.
 
-For each separate damage instance, apply DR and elemental adjustments manually, then remove floor(adjusted damage / slot toughness) Health slots. Remainders do not accumulate. Healing restores slots. Spell effects, targeting, critical damage, injuries, recovery, death countdown, Rank benefits, and Buff/Debuff penalties are adjudicated manually. Status markers are labels, not automated effects. Item Hotlist is a flag only; no dedicated Hotlist panel yet. Race/Class items record features without applying modifiers. Advancement is editable Level/Rank, not an XP workflow. Achievements record description and reward.
+Race & Class records benefits, selection requirements and character background. Achievements record their trigger, awarded Floor/date and reward without irrelevant combat fields. Log & Effects records Buffs, Debuffs, resistances, vulnerabilities, immunities and three active External Buffs. Status icons are markers; conditional bonuses and durations are manual.
 
-No rulebook text, artwork, content compendiums, character wizard or starter characters are bundled. Bring your own book. The interface uses an original dark broadcast HUD, cyan highlights, green Health slots and gold achievements.
+## Inventory
 
-## Validation
-JavaScript syntax and core rule calculations checked, including all Stat Mod boundaries, degree of success and Health-slot damage example. An HTML design preview illustrates the same CSS but is not a running Foundry sheet; browser rendering verification was unavailable in this environment. Foundry runtime integration, sheet saving, item drops and token bars require in-world testing.
+Inventory storage is unlimited and weightless. Items may be stored, equipped/held, left on the floor, or in personal space/elsewhere. Strength × 15 lb shows the lifting maximum, not an encumbrance allowance; creature/liquid/explosive restrictions are adjudicated by the GM.
 
-## v0.2.0
+The paper doll shows Head, Torso, Arms, Gloves, Legs, Feet and Holding. Empty slots have Add gear buttons. Click equipped gear to edit it or Store to remove it. Set an item's allowed gear slot in its editor, then Equip or select Equipped in its row. Each clothing slot holds one entry; one pair of gloves may be worn while both hands hold items. Two-handed equipment blocks both holding slots. Accessories allow ten entries, including at most one belt and one cape. A quantity stack represents one equipped copy, with remaining copies stored.
 
-Fixes character sheet opening: actor and item template parts now render a single outer HTML element, as required by Foundry ApplicationV2. Existing controls and data fields are preserved.
+Fixed Stat, DR and Evade bonuses from valid equipped items apply automatically. An optional gear bonus to the 100% Health slot is also supported. Stored, dropped or remote gear does not grant these bonuses. Keep manual enhancement/DR fields for other sources, to avoid double-counting gear. Conditional bonuses, percentage modifiers and other special effects stay in the description.
 
-The repository and packaged system.json include the permanent manifest URL and version-specific release download URL. Install from:
+The Hotlist defaults to ten entries; capacity is editable for specific rule effects. It is a shortcut list, not a second item copy or equipment location. Prepare/remove entries with the Hotlist buttons. Item editors allow a numbered position or Auto. Hotlist weapons draw on Attack and store conflicting held weapons/shields first. Other equip actions require freeing occupied slots. In combat, retrieving a non-Hotlist item requires its normal Action.
+
+Gear supports armour/shields, potions, scrolls, spellbooks, pet carriers and other items. Quantity controls add/remove copies. Potions, scrolls and spellbooks spend a copy on use. Scrolls use their fixed Spell Rank and cost no Mana; configure Passive for a non-Attack scroll. Spellbooks add the named Spell at their recorded Rank, but complete the new Spell's mechanical fields manually. Consumable effects remain manual. Charges are a separate manual tracker. Zero-quantity items become unavailable.
+
+## Install and release
+
+The stable manifest remains:
 https://raw.githubusercontent.com/antiochusblack/dungeon-crawler-carl-foundry/main/system.json
 
-Release validation checks template root structure, JSON, declared files, package contents and core calculations. Full Foundry runtime validation still requires installing the release in a world.
+See RELEASE.md for permanent packaging rules. When a release is requested, extract its ZIP so system.json is at Data/systems/dungeon-crawler-carl/system.json. For upgrades preserve the same system ID and existing actor/item data. No rulebook text or official artwork is bundled; the silhouette is an original SVG.
+
+## Validation
+
+Run node tests/rules.test.mjs for equipment conflicts, accessory limits, Hotlist capacity, Health-slot damage and resource bounds. All six actor tabs and seven item templates have been compiled against populated contexts and checked for a single root. A lightweight Foundry API harness exercises resource adjustment and equipped-bonus removal. A static graphic preview has been rendered and visually inspected. This is not a running Foundry instance: sheet saving, drag/drop and token bars still require in-world testing.
+
+## Rules reviewed
+
+Core Rulebook: Stats/checks pp. 56–61; actions/combat pp. 64, 79–86; Health, resting and Buffs pp. 93–97; Inventory, Hotlist and Gear Slots pp. 98–99; character setup pp. 108–116; advancement p. 169; Skill/Spell fields pp. 173–175, 202; magical equipment pp. 216–219; Popularity pp. 279–280.
