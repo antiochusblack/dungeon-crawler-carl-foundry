@@ -1,0 +1,38 @@
+{
+  "id": "dungeon-crawler-carl",
+  "title": "Dungeon Crawler Carl \u2014 Unofficial",
+  "description": "Lean unofficial first-pass system. Bring your own rulebook.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "authors": [
+    {
+      "name": "Community prototype"
+    }
+  ],
+  "esmodules": [
+    "scripts/carl.mjs"
+  ],
+  "styles": [
+    "styles/carl.css"
+  ],
+  "documentTypes": {
+    "Actor": [
+      "crawler",
+      "mob"
+    ],
+    "Item": [
+      "skill",
+      "spell",
+      "weapon",
+      "gear",
+      "race",
+      "class",
+      "achievement"
+    ]
+  },
+  "primaryTokenAttribute": "health",
+  "secondaryTokenAttribute": "mana"
+}

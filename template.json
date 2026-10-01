@@ -1,0 +1,207 @@
+{
+  "Actor": {
+    "types": [
+      "crawler",
+      "mob"
+    ],
+    "crawler": {
+      "level": 1,
+      "floor": 1,
+      "race": "Human",
+      "className": "",
+      "notes": "",
+      "aiFavor": 0,
+      "gold": 0,
+      "dr": 0,
+      "move": 30,
+      "health": {
+        "value": 10,
+        "max": 10
+      },
+      "mana": {
+        "value": 4,
+        "max": 4
+      },
+      "stats": {
+        "str": {
+          "base": 4,
+          "bonus": 0
+        },
+        "int": {
+          "base": 4,
+          "bonus": 0
+        },
+        "con": {
+          "base": 4,
+          "bonus": 0
+        },
+        "dex": {
+          "base": 4,
+          "bonus": 0
+        },
+        "cha": {
+          "base": 4,
+          "bonus": 0
+        }
+      },
+      "mob": {
+        "action": 12,
+        "evade": 12,
+        "slot": 2,
+        "tier": "Mob"
+      },
+      "roll": {
+        "difficulty": 12,
+        "bonus": 0,
+        "mode": "normal"
+      }
+    },
+    "mob": {
+      "level": 1,
+      "floor": 1,
+      "race": "Human",
+      "className": "",
+      "notes": "",
+      "aiFavor": 0,
+      "gold": 0,
+      "dr": 0,
+      "move": 30,
+      "health": {
+        "value": 10,
+        "max": 10
+      },
+      "mana": {
+        "value": 4,
+        "max": 4
+      },
+      "stats": {
+        "str": {
+          "base": 4,
+          "bonus": 0
+        },
+        "int": {
+          "base": 4,
+          "bonus": 0
+        },
+        "con": {
+          "base": 4,
+          "bonus": 0
+        },
+        "dex": {
+          "base": 4,
+          "bonus": 0
+        },
+        "cha": {
+          "base": 4,
+          "bonus": 0
+        }
+      },
+      "mob": {
+        "action": 12,
+        "evade": 12,
+        "slot": 2,
+        "tier": "Mob"
+      },
+      "roll": {
+        "difficulty": 12,
+        "bonus": 0,
+        "mode": "normal"
+      }
+    }
+  },
+  "Item": {
+    "types": [
+      "skill",
+      "spell",
+      "weapon",
+      "gear",
+      "race",
+      "class",
+      "achievement"
+    ],
+    "skill": {
+      "description": "",
+      "rank": 1,
+      "stat": "str",
+      "damage": "",
+      "damageMod": false,
+      "manaCost": 0,
+      "quantity": 1,
+      "hotlist": false,
+      "passive": false,
+      "reward": ""
+    },
+    "spell": {
+      "description": "",
+      "rank": 1,
+      "stat": "str",
+      "damage": "",
+      "damageMod": false,
+      "manaCost": 0,
+      "quantity": 1,
+      "hotlist": false,
+      "passive": false,
+      "reward": ""
+    },
+    "weapon": {
+      "description": "",
+      "rank": 1,
+      "stat": "str",
+      "damage": "",
+      "damageMod": false,
+      "manaCost": 0,
+      "quantity": 1,
+      "hotlist": false,
+      "passive": false,
+      "reward": ""
+    },
+    "gear": {
+      "description": "",
+      "rank": 1,
+      "stat": "str",
+      "damage": "",
+      "damageMod": false,
+      "manaCost": 0,
+      "quantity": 1,
+      "hotlist": false,
+      "passive": false,
+      "reward": ""
+    },
+    "race": {
+      "description": "",
+      "rank": 1,
+      "stat": "str",
+      "damage": "",
+      "damageMod": false,
+      "manaCost": 0,
+      "quantity": 1,
+      "hotlist": false,
+      "passive": false,
+      "reward": ""
+    },
+    "class": {
+      "description": "",
+      "rank": 1,
+      "stat": "str",
+      "damage": "",
+      "damageMod": false,
+      "manaCost": 0,
+      "quantity": 1,
+      "hotlist": false,
+      "passive": false,
+      "reward": ""
+    },
+    "achievement": {
+      "description": "",
+      "rank": 1,
+      "stat": "str",
+      "damage": "",
+      "damageMod": false,
+      "manaCost": 0,
+      "quantity": 1,
+      "hotlist": false,
+      "passive": false,
+      "reward": ""
+    }
+  }
+}
