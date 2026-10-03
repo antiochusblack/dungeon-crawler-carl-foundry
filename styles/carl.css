@@ -525,3 +525,5 @@
 .carl button.store-icon {display:inline-flex;align-items:center;justify-content:center;flex:0 0 28px;width:28px;min-width:28px;height:28px;min-height:28px;padding:5px;border-color:#405d6e;background:#172a37;color:#9acddc;}
 .carl button.store-icon:hover {color:#fff;background:#2a485b;}
 .carl .store-icon svg {width:16px;height:16px;pointer-events:none;}
+
+.carl .item-icon { flex: 0 0 auto; width: 28px; min-width: 28px; padding: 2px; }

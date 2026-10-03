@@ -2,7 +2,7 @@
   "id": "dungeon-crawler-carl",
   "title": "Dungeon Crawler Carl \u2014 Unofficial",
   "description": "Lean unofficial first-pass system. Bring your own rulebook.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "compatibility": {
     "minimum": "14",
     "verified": "14"
@@ -30,11 +30,26 @@
       "gear",
       "race",
       "class",
-      "achievement"
+      "achievement",
+      "ability"
     ]
   },
   "primaryTokenAttribute": "health",
   "secondaryTokenAttribute": "mana",
   "manifest": "https://raw.githubusercontent.com/antiochusblack/dungeon-crawler-carl-foundry/main/system.json",
-  "download": "https://github.com/antiochusblack/dungeon-crawler-carl-foundry/releases/download/v0.3.0/dungeon-crawler-carl-0.3.0.zip"
+  "download": "https://github.com/antiochusblack/dungeon-crawler-carl-foundry/releases/download/v0.4.0/dungeon-crawler-carl-0.4.0.zip",
+  "packs": [
+    {
+      "name": "examples",
+      "label": "Crawler Starter Kit \u2014 Examples",
+      "path": "packs/examples",
+      "type": "Item",
+      "system": "dungeon-crawler-carl",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "flags": {}
+    }
+  ]
 }

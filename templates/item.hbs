@@ -11,10 +11,7 @@
           value="{{system.rank}}"
           min="0"
           max="20"
-        /></label><label>Stat Mod<select name="system.stat">{{selectOptions
-            stats
-            selected=system.stat
-          }}</select></label><label>Grinding hours<input
+        /></label><label>Associated / Casting Stat<input type="text" name="system.stat" value="{{system.stat}}" /></label><label>Grinding hours (legacy tracker)<input
           type="number"
           name="system.grindingHours"
           value="{{system.grindingHours}}"
@@ -25,10 +22,7 @@
           {{checked system.used}}
         />
         Used / advancement mark</label>{{/if}}{{#if isSkill}}<label
-      >Category<select name="system.category">{{selectOptions
-            categories
-            selected=system.category
-          }}</select></label><label>Check type<select
+      >Type<input type="text" name="system.category" value="{{system.category}}" /></label><label>Check type<select
           name="system.checkType"
         >{{selectOptions
             checkTypes
@@ -83,7 +77,7 @@
           name="system.quantity"
           value="{{system.quantity}}"
           min="0"
-        /></label><label>Weight of one item (lb)<input
+        /></label><label>Weight of one item (lb, legacy tracker)<input
           type="number"
           name="system.weight"
           value="{{system.weight}}"
@@ -105,7 +99,7 @@
         >{{selectOptions
             handSlots
             selected=system.equipSlot
-          }}</select></label><label>Hands required<select
+          }}</select></label><label>Hands used for slot validation<select
           name="system.hands"
         >{{selectOptions hands selected=system.hands}}</select></label><label
       >Accessory subtype<select name="system.accessoryKind">{{selectOptions
@@ -115,7 +109,7 @@
           type="number"
           name="system.difficulty"
           value="{{system.difficulty}}"
-        /></label>{{/if}}{{#if isGear}}<label>Gear type<select
+        /></label>{{/if}}{{#if isGear}}<label>Consumable / inventory behavior<select
           name="system.gearType"
         >{{selectOptions
             gearTypes
@@ -129,10 +123,7 @@
             max="20"
             name="system.scrollRank"
             value="{{system.scrollRank}}"
-          /></label><label>Spell Stat<select name="system.stat">{{selectOptions
-              stats
-              selected=system.stat
-            }}</select></label><label class="check"><input
+          /></label><label>Spell Stat<input type="text" name="system.stat" value="{{system.stat}}" /></label><label class="check"><input
             type="checkbox"
             name="system.passive"
             {{checked system.passive}}
@@ -157,8 +148,7 @@
           name="system.charges"
           value="{{system.charges}}"
           min="0"
-        /></label>{{/if}}{{#if damageCapable}}<label>Damage formula (current
-        Rank)<input
+        /></label>{{/if}}{{#if damageCapable}}<label>Base Damage (dice formula for clickable rolls)<input
           type="text"
           name="system.damage"
           value="{{system.damage}}"
@@ -244,14 +234,13 @@
         name="system.limitations"
       >{{system.limitations}}</textarea></label>{{/if}}{{#if isAbility}}<label
       class="wide"
-    >Rank upgrades / effects<textarea
+    >Legacy combined Rank upgrades / effects<textarea
         name="system.upgrades"
       >{{system.upgrades}}</textarea></label>{{/if}}{{#if identity}}<label
       class="wide"
     >Benefits (record Stat / Skill changes on the actor)<textarea
         name="system.benefits"
-      >{{system.benefits}}</textarea></label><label class="wide">Selection
-      requirements<textarea
+      >{{system.benefits}}</textarea></label><label class="wide">Requirements / Restrictions<textarea
         name="system.requirements"
       >{{system.requirements}}</textarea></label>{{/if}}{{#if
     achievement
@@ -269,4 +258,4 @@
       type="text"
       name="system.source"
       value="{{system.source}}"
-    /></label></div>
+    /></label>{{#each textFields}}<label class="wide">{{label}}<textarea name="system.{{key}}">{{value}}</textarea></label>{{/each}}{{#if achievement}}<label class="check"><input type="checkbox" name="system.awarded" {{checked system.awarded}} /> Awarded</label>{{/if}}</div>

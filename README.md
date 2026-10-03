@@ -1,6 +1,6 @@
 # Dungeon Crawler Carl — unofficial Foundry prototype
 
-Pending version: 0.3.0. Targets Foundry VTT 14. No v0.3.0 release ZIP has been built or published yet.
+Version 0.4.0. Targets Foundry VTT 14. Includes the Crawler Starter Kit compendium: five original examples per Item type, organised into eight folders. Examples are custom sample content, not published rulebook entries.
 
 ## Sheets
 

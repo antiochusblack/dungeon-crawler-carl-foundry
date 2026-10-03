@@ -1,3 +1,4 @@
+import { ITEM_TEXT_FIELDS, statKey, linkedSkill } from "./item-fields.mjs";
 import { statMod, degree } from "./math.mjs";
 import {
   LOCATIONS,
@@ -81,6 +82,8 @@ class CarlActor extends Actor {
   }
   async check(label, stat, rank = 0, untrained = false, extra = 0) {
     if (!this.isOwner) return;
+    stat = statKey(stat);
+    if (stat !== "none" && !this.system.stats[stat]) return ui.notifications.warn("Choose a standard Stat for this check; resolve custom Stat rules manually.");
     const s = this.system;
     let mode =
       untrained && s.roll.mode !== "advantage"
@@ -109,6 +112,18 @@ class CarlActor extends Actor {
   }
 }
 class CarlItem extends Item {
+  async _preDelete(options, user) {
+    if ((await super._preDelete(options, user)) === false) return false;
+    return await foundry.applications.api.DialogV2.confirm({
+      window: { title: `Delete "${this.name}"?` },
+      content: `<p>Delete &quot;${esc(this.name)}&quot;?${this.parent ? " This removes this character’s copy only." : ""}</p>`,
+      yes: { label: "Delete", icon: "fa-solid fa-trash", default: false },
+      no: { label: "Cancel", icon: "fa-solid fa-xmark", default: true },
+      modal: true,
+      rejectClose: false,
+    }) === true;
+  }
+
   async _preUpdate(changes, options, user) {
     const result = await super._preUpdate(changes, options, user);
     if (result === false) return false;
@@ -228,6 +243,10 @@ const actions = {
   },
   edit: function (e, t) {
     this.actor.items.get(t.dataset.id)?.sheet.render(true);
+  },
+  remove: async function (e, t) {
+    if (!this.isEditable) return;
+    await this.actor.items.get(t.dataset.id)?.delete();
   },
   create: async function (e, t) {
     if (!this.isEditable) return;
@@ -401,7 +420,7 @@ const actions = {
       await new Roll(
         i.system.damage +
           (i.system.damageMod
-            ? `+${num(this.actor.system.stats[i.system.stat]?.mod)}`
+            ? `+${num(this.actor.system.stats[statKey(i.system.stat)]?.mod)}`
             : ""),
         this.actor.getRollData(),
       ).toMessage(
@@ -492,13 +511,13 @@ const actions = {
         "Rank 16+ benefits unlock on Floor 6. Apply eligible effects manually.",
       );
     const skill =
-      i.type === "weapon" && s.skillId ? this.actor.items.get(s.skillId) : null;
-    if (s.skillId && !skill)
+      i.type === "weapon" ? linkedSkill(i, this.actor.items) : null;
+    if ((s.skillId || s.linkedSkill) && !skill)
       return ui.notifications.warn(
         "The linked Weapon Skill is missing. Edit this weapon to select a Skill.",
       );
     const rank = skill ? num(skill.system.rank) : num(s.rank);
-    const stat = skill ? skill.system.stat : s.stat;
+    const stat = skill ? skill.system.stat : (s.toHitStat || s.stat);
     const passive = skill ? skill.system.passive : s.passive;
     if (
       this.actor.type === "crawler" &&
@@ -580,6 +599,20 @@ class CarlSheet extends HandlebarsApplicationMixin(
   static PARTS = {
     body: { template: "systems/dungeon-crawler-carl/templates/actor.hbs" },
   };
+  get _dragDrop() {
+    return this._carlDragDrop ??= new foundry.applications.ux.DragDrop({
+      dragSelector: ".entry[data-item-id]", dropSelector: null,
+      permissions: { dragstart: this._canDragStart.bind(this), drop: this._canDragDrop.bind(this) },
+      callbacks: { dragstart: this._onDragStart.bind(this), dragover: this._onDragOver.bind(this), drop: this._onDrop.bind(this) },
+    });
+  }
+  async _onDragStart(event) {
+    const row = event.target.closest(".entry[data-item-id]");
+    const item = this.actor.items.get(row?.dataset.itemId);
+    if (!item || !this._canDragStart(".entry[data-item-id]")) return;
+    event.dataTransfer.setData("text/plain", JSON.stringify(item.toDragData()));
+  }
+
   static TABS = {
     primary: {
       tabs: [
@@ -610,7 +643,7 @@ class CarlSheet extends HandlebarsApplicationMixin(
       slotLabel: EQUIP_SLOTS[equipSlot(i.system)] ?? "",
       equipped: i.system.location === "equipped",
       hasDamage: !!i.system.damage,
-      skillLabel: i.system.skillId ? a.items.get(i.system.skillId)?.name : "",
+      skillLabel: i.type === "weapon" ? linkedSkill(i, a.items)?.name : "",
       isSpell: i.type === "spell",
       effectiveMana:
         num(i.system.manaCost) +
@@ -663,6 +696,7 @@ class CarlSheet extends HandlebarsApplicationMixin(
         "race",
         "class",
         "achievement",
+        "ability",
       ].map((type) => ({
         type,
         items: items.filter((i) => i.type === type).map(decorate),
@@ -761,6 +795,7 @@ class CarlItemSheet extends HandlebarsApplicationMixin(
       ...(await super._prepareContext(o)),
       item: this.item,
       system: this.item.system,
+      textFields: (ITEM_TEXT_FIELDS[t] ?? []).map(([key, label]) => ({ key, label, value: this.item.system[key] ?? "" })),
       isSkill: t === "skill",
       isSpell: t === "spell",
       isWeapon: t === "weapon",

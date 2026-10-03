@@ -193,7 +193,8 @@
       "gear",
       "race",
       "class",
-      "achievement"
+      "achievement",
+      "ability"
     ],
     "skill": {
       "description": "",
@@ -249,7 +250,12 @@
       "gearType": "mundane",
       "scrollRank": 1,
       "spellName": "",
-      "difficulty": 12
+      "difficulty": 12,
+      "effects": "",
+      "upgrade5": "",
+      "upgrade10": "",
+      "upgrade15": "",
+      "training": ""
     },
     "spell": {
       "description": "",
@@ -305,7 +311,12 @@
       "gearType": "mundane",
       "scrollRank": 1,
       "spellName": "",
-      "difficulty": 12
+      "difficulty": 12,
+      "aiFavor": "",
+      "effects": "",
+      "upgrade5": "",
+      "upgrade10": "",
+      "upgrade15": ""
     },
     "weapon": {
       "description": "",
@@ -361,7 +372,14 @@
       "gearType": "mundane",
       "scrollRank": 1,
       "spellName": "",
-      "difficulty": 12
+      "difficulty": 12,
+      "linkedSkill": "",
+      "attackType": "",
+      "toHitStat": "",
+      "aiFavor": "",
+      "effects": "",
+      "handsRequired": "",
+      "ammunition": ""
     },
     "gear": {
       "description": "",
@@ -417,7 +435,12 @@
       "gearType": "mundane",
       "scrollRank": 1,
       "spellName": "",
-      "difficulty": 12
+      "difficulty": 12,
+      "subtype": "",
+      "bonuses": "",
+      "effects": "",
+      "uses": "",
+      "liftingWeight": ""
     },
     "race": {
       "description": "",
@@ -473,7 +496,15 @@
       "gearType": "mundane",
       "scrollRank": 1,
       "spellName": "",
-      "difficulty": 12
+      "difficulty": 12,
+      "statAdjustments": "",
+      "size": "",
+      "movementChanges": "",
+      "skillChanges": "",
+      "spellChanges": "",
+      "resistances": "",
+      "naturalAttacks": "",
+      "specialRules": ""
     },
     "class": {
       "description": "",
@@ -529,7 +560,12 @@
       "gearType": "mundane",
       "scrollRank": 1,
       "spellName": "",
-      "difficulty": 12
+      "difficulty": 12,
+      "statAdjustments": "",
+      "skillBonuses": "",
+      "grantedSkills": "",
+      "favoredSpells": "",
+      "specialRules": ""
     },
     "achievement": {
       "description": "",
@@ -585,7 +621,78 @@
       "gearType": "mundane",
       "scrollRank": 1,
       "spellName": "",
-      "difficulty": 12
+      "difficulty": 12,
+      "floor": "",
+      "awardedDate": "",
+      "notes": "",
+      "awarded": false
+    },
+    "ability": {
+      "description": "",
+      "rank": 1,
+      "stat": "str",
+      "damage": "",
+      "damageMod": false,
+      "manaCost": 0,
+      "quantity": 1,
+      "hotlist": false,
+      "passive": false,
+      "reward": "",
+      "category": "",
+      "range": "",
+      "duration": "",
+      "cooldown": "",
+      "limitations": "",
+      "upgrades": "",
+      "damageType": "",
+      "used": false,
+      "grindingHours": 0,
+      "checkType": "unopposed",
+      "favored": "",
+      "favoredApplies": true,
+      "manaSurcharge": 0,
+      "actionType": "Action",
+      "location": "inventory",
+      "gearSlot": "none",
+      "equipSlot": "left",
+      "hands": 1,
+      "accessoryKind": "other",
+      "hotlistPosition": 0,
+      "rarity": "",
+      "weight": 0,
+      "skillId": "",
+      "drBonus": 0,
+      "evadeBonus": 0,
+      "statBonuses": {
+        "str": 0,
+        "int": 0,
+        "con": 0,
+        "dex": 0,
+        "cha": 0
+      },
+      "healthSlotBonus": 0,
+      "consumable": false,
+      "charges": 0,
+      "benefits": "",
+      "requirements": "",
+      "awardedOn": "",
+      "source": "",
+      "trigger": "",
+      "gearType": "mundane",
+      "scrollRank": 1,
+      "spellName": "",
+      "difficulty": 12,
+      "statAdjustments": "",
+      "size": "",
+      "movementChanges": "",
+      "skillChanges": "",
+      "spellChanges": "",
+      "resistances": "",
+      "naturalAttacks": "",
+      "specialRules": "",
+      "abilityType": "",
+      "uses": "",
+      "effects": ""
     }
   }
 }

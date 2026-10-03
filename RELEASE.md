@@ -10,6 +10,6 @@ Preserve manifest and download whenever editing or regenerating system.json. Bui
 
 Before publishing, validate JSON, compare the source and packaged manifests, and confirm version, release tag, download URL and asset filename match. Verify that every declared script and style is packaged. Publish the matching asset before updating the stable main manifest to advertise it. Do not advertise an unreleased download URL from main while a release is still being prepared.
 
-## Pending v0.3.0
+## v0.4.0 package
 
-Local metadata prepared for 0.3.0. More changes are expected. Do not build the ZIP or publish until the user requests completion.
+Asset: dungeon-crawler-carl-0.4.0.zip, attached to GitHub Release v0.4.0. The package includes the compiled examples compendium. Upload the asset before updating the main branch manifest.
