@@ -1,6 +1,6 @@
 # Dungeon Crawler Carl — unofficial Foundry prototype
 
-Version 0.4.0. Targets Foundry VTT 14. Includes the Crawler Starter Kit compendium: five original examples per Item type, organised into eight folders. Examples are custom sample content, not published rulebook entries.
+Version 0.4.1. Targets Foundry VTT 14. Includes the Crawler Starter Kit compendium: five original examples per Item type, organised into eight folders. Examples are custom sample content, not published rulebook entries.
 
 ## Sheets
 
@@ -38,3 +38,9 @@ Run node tests/rules.test.mjs for equipment conflicts, accessory limits, Hotlist
 ## Rules reviewed
 
 Core Rulebook: Stats/checks pp. 56–61; actions/combat pp. 64, 79–86; Health, resting and Buffs pp. 93–97; Inventory, Hotlist and Gear Slots pp. 98–99; character setup pp. 108–116; advancement p. 169; Skill/Spell fields pp. 173–175, 202; magical equipment pp. 216–219; Popularity pp. 279–280.
+
+## Private table imports
+
+As GM, open the RollTables sidebar and click **Import Tables**. Select your separate `DCC-Rulebook-Tables.json` file, click **Read File**, then review the counts and choose **Import**. Tables are created as normal world RollTables in chapter folders, with working subtable links. Reimporting the same bundle keeps existing tables and their edits; a interrupted import can be retried. The file is read locally, with no external upload.
+
+The public system includes only the generic importer. Rulebook table data is distributed separately and must not be committed or included in the public release package.

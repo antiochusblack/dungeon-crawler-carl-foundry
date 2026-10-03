@@ -1,3 +1,4 @@
+import "./table-import.mjs";
 import { ITEM_TEXT_FIELDS, statKey, linkedSkill } from "./item-fields.mjs";
 import { statMod, degree } from "./math.mjs";
 import {

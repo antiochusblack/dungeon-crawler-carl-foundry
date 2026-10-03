@@ -1,3 +1,9 @@
+# 0.4.1
+
+- Add a GM-only Import Tables button to the RollTables sidebar for separate private JSON bundles.
+- Validate folders, roll ranges and subtable links; preserve previously imported world tables on repeat imports.
+- Keep rulebook table content outside the public system and release package.
+
 # 0.4.0
 
 - Add Ability documents and flexible fields for all eight Item types.

@@ -527,3 +527,5 @@
 .carl .store-icon svg {width:16px;height:16px;pointer-events:none;}
 
 .carl .item-icon { flex: 0 0 auto; width: 28px; min-width: 28px; padding: 2px; }
+
+.dcc-import-tables { white-space: nowrap; }
