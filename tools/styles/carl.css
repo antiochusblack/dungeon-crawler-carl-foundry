@@ -1,0 +1,604 @@
+.carl {
+  --gold: #ffce56;
+  --cyan: #6de8f6;
+  --ink: #12171d;
+  color: #e5edf1;
+  font-family: Arial, sans-serif;
+}
+.carl .window-content {
+  background: linear-gradient(145deg, #17242d, #101319);
+  padding: 18px;
+  overflow: auto;
+}
+.carl .hud {
+  border-left: 5px solid var(--gold);
+  padding: 12px 18px;
+  background: #090e13;
+}
+.carl small,
+.carl-card small {
+  color: #6de8f6;
+  letter-spacing: 2px;
+  font-size: 10px;
+}
+.carl h1 {
+  font-size: 24px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin: 8px 0;
+}
+.carl h2 {
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin: 22px 0 12px;
+  border-bottom: 1px solid #46515b;
+  padding-bottom: 8px;
+}
+.carl input,
+.carl select,
+.carl textarea {
+  color: #fff !important;
+  background: #202c37 !important;
+  border: 1px solid #526371;
+  border-radius: 3px;
+  padding: 6px;
+  height: 34px;
+  width: 100%;
+}
+.carl .name {
+  font-size: 22px;
+  height: 44px;
+  margin-bottom: 14px;
+}
+.carl label {
+  font-size: 11px;
+  color: #adbfcc;
+  display: block;
+}
+.carl label input,
+.carl label select {
+  margin-top: 5px;
+}
+.carl .grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.carl .tabs {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 16px 0;
+  border-bottom: 1px solid #46515b;
+}
+.carl .tabs a {
+  font-size: 12px;
+  color: #adbfcc;
+}
+.carl .tabs .active {
+  color: var(--gold);
+}
+.carl .tab {
+  display: none;
+}
+.carl .tab.active {
+  display: block;
+}
+.carl .health {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+.carl .health span {
+  height: 24px;
+  flex: 1;
+  min-width: 12px;
+  background: #4d202a;
+  border: 1px solid #77515b;
+}
+.carl .health .filled {
+  background: #45d9a1;
+  border-color: #9bffce;
+}
+.carl .stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+.carl .stats > div {
+  background: #192530;
+  padding: 10px;
+  border: 1px solid #344955;
+}
+.carl output {
+  display: block;
+  color: var(--cyan);
+  font-size: 26px;
+  margin: 8px 0;
+}
+.carl button {
+  color: #f6de9c;
+  background: #263643;
+  border: 1px solid #7e6c3d;
+  border-radius: 3px;
+  font-size: 12px;
+  padding: 5px;
+  cursor: pointer;
+}
+.carl button:hover {
+  background: #3a4c5c;
+}
+.carl .item-row {
+  display: grid;
+  grid-template-columns: 1fr 65px 68px 45px;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid #31414d;
+}
+.carl textarea {
+  height: 190px;
+  resize: vertical;
+  line-height: 1.6;
+}
+.carl input[type="checkbox"] {
+  width: 22px;
+}
+.carl .tab[data-tab="achievements"] .item-row {
+  border: 1px solid #776532;
+  background: #302919;
+  padding: 12px;
+  margin: 10px 0;
+}
+@media (max-width: 650px) {
+  .carl .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .carl .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+/* v0.3.0: resources, typed entries and gear-slot HUD */
+.carl .identity-header {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 14px;
+}
+.carl .identity-header img {
+  width: 70px;
+  height: 90px;
+  object-fit: cover;
+  border: 1px solid #596c78;
+  cursor: pointer;
+}
+.carl .resource-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+.carl .resource {
+  padding: 10px;
+  background: #162633;
+  border: 1px solid #374e60;
+}
+.carl .resource > div {
+  display: grid;
+  grid-template-columns: 28px 1fr 28px;
+  gap: 4px;
+  margin: 6px 0;
+}
+.carl .resource input {
+  text-align: center;
+  min-width: 0;
+}
+.carl .resource small {
+  letter-spacing: 0;
+  color: #a3b5c5;
+}
+.carl .toolbar {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 16px 0;
+}
+.carl .toolbar label {
+  max-width: 260px;
+}
+.carl .toolbar [data-adjust-amount] {
+  width: 70px;
+}
+.carl .health-slot {
+  flex: 1;
+  min-width: 42px;
+  border: 1px solid #85515b;
+  background: #4d202a;
+  color: #c8b1b5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+}
+.carl .health-slot.filled {
+  background: #236a55;
+  color: #dcfff2;
+  border-color: #65deb0;
+}
+.carl .health-slot small {
+  font-size: 9px;
+  letter-spacing: 0;
+  color: inherit;
+}
+.carl .entry {
+  margin: 10px 0;
+  padding: 12px;
+  background: #182631;
+  border: 1px solid #344b5c;
+  border-radius: 4px;
+}
+.carl .entry-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.carl .entry-name {
+  text-align: left;
+  font-weight: bold;
+  font-size: 14px;
+}
+.carl .entry-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  margin-top: 10px;
+}
+.carl .entry-meta select {
+  width: 185px;
+}
+.carl .muted {
+  color: #a4b7c4;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.carl .entry p {
+  white-space: pre-wrap;
+}
+.carl .rank-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.carl .two-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.carl label.wide textarea {
+  height: 110px;
+  margin-top: 6px;
+}
+.carl .check {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 38px;
+}
+.carl .check input {
+  margin: 0;
+  flex: none;
+}
+.carl .hotlist-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+.carl .hotlist-slot {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 66px;
+  background: #0e1d28;
+  border: 1px solid #3e667b;
+  padding: 8px;
+  position: relative;
+}
+.carl .hotlist-slot > small {
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  font-size: 9px;
+  letter-spacing: 0;
+}
+.carl .hotlist-slot > button:first-of-type {
+  flex: 1;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  margin-top: 8px;
+}
+.carl .quiet {
+  color: #adc1cc;
+  border-color: #40535f;
+}
+.carl .paper-doll {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 180px 1fr;
+  grid-template-rows: repeat(5, minmax(85px, auto));
+  gap: 14px;
+  padding: 20px;
+  background: radial-gradient(ellipse at center, #21455380, #07131d);
+  border: 1px solid #456679;
+  isolation: isolate;
+}
+.carl .paper-doll:before {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  background: url("../assets/crawler-doll.svg") center/auto 95% no-repeat;
+  opacity: 0.3;
+  z-index: -1;
+}
+.carl .gear-position {
+  padding: 10px;
+  background: #101e2adb;
+  border: 1px solid #517184;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.carl h3 {
+  color: #85e4ed;
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin: 0 0 6px;
+}
+.carl .slot-head {
+  grid-area: 1/2;
+}
+.carl .slot-torso {
+  grid-area: 2/2;
+}
+.carl .slot-arms {
+  grid-area: 2/1;
+}
+.carl .slot-gloves {
+  grid-area: 3/1;
+}
+.carl .slot-legs {
+  grid-area: 3/2;
+}
+.carl .slot-feet {
+  grid-area: 4/2;
+}
+.carl .slot-left {
+  grid-area: 4/1;
+}
+.carl .slot-right {
+  grid-area: 4/3;
+}
+.carl .slot-both {
+  grid-area: 5/2;
+}
+.carl .accessory-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin: 12px 0;
+}
+.carl .accessory-grid > div {
+  background: #24251c;
+  padding: 8px;
+  border: 1px solid #726b43;
+}
+.carl .warning {
+  background: #573a1a;
+  color: #ffdc92;
+  padding: 10px;
+  border: 1px solid #a66c2a;
+}
+.carl .reward {
+  color: #ffdc92;
+}
+.carl .tab[data-tab="achievements"] .entry {
+  background: #302919;
+  border-color: #776532;
+}
+.carl details {
+  margin: 18px 0;
+}
+.carl summary {
+  color: #ffce56;
+  cursor: pointer;
+}
+@media (max-width: 720px) {
+  .carl .resource-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .carl .hotlist-grid,
+  .carl .accessory-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .carl .paper-doll {
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+    gap: 8px;
+  }
+  .carl .gear-position {
+    grid-area: auto;
+  }
+  .carl .two-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Keep the silhouette visible between gear cards. */
+.carl .paper-doll:before {
+  display: none;
+}
+.carl .doll-figure {
+  grid-column: 2;
+  grid-row: 1 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carl .doll-figure img {
+  width: 160px;
+  height: 420px;
+  object-fit: contain;
+  opacity: 0.7;
+  border: 0;
+}
+.carl .gear-position button,
+.carl .accessory-grid button {
+  width: 100%;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+.carl .slot-head {
+  grid-area: 1/1;
+}
+.carl .slot-torso {
+  grid-area: 1/3;
+}
+.carl .slot-arms {
+  grid-area: 2/1;
+}
+.carl .slot-gloves {
+  grid-area: 2/3;
+}
+.carl .slot-legs {
+  grid-area: 3/1;
+}
+.carl .slot-feet {
+  grid-area: 3/3;
+}
+.carl .slot-left {
+  grid-area: 4/1;
+}
+.carl .slot-right {
+  grid-area: 4/3;
+}
+.carl .slot-both {
+  grid-area: 5/2;
+}
+@media (max-width: 720px) {
+  .carl .doll-figure {
+    display: none;
+  }
+  .carl .gear-position {
+    grid-area: auto;
+  }
+}
+.carl button {
+  line-height: 1.3;
+  min-height: 28px;
+  height: auto;
+}
+.carl .paper-doll {
+  grid-template-rows: repeat(5, minmax(110px, auto));
+}
+
+.carl .equipped-item {display:flex;align-items:center;gap:6px;min-width:0;}
+.carl .equipped-item .equipped-name {flex:1;width:auto;min-width:0;text-align:left;}
+.carl button.store-icon {display:inline-flex;align-items:center;justify-content:center;flex:0 0 28px;width:28px;min-width:28px;height:28px;min-height:28px;padding:5px;border-color:#405d6e;background:#172a37;color:#9acddc;}
+.carl button.store-icon:hover {color:#fff;background:#2a485b;}
+.carl .store-icon svg {width:16px;height:16px;pointer-events:none;}
+
+.carl .item-icon { flex: 0 0 auto; width: 28px; min-width: 28px; padding: 2px; }
+
+.dcc-import-tables { white-space: nowrap; }
+
+.dcc-table-number { font-size: 1.6em; font-weight: bold; text-align: center; }
+.dcc-table-entry { margin: .5em 0; }
+.dcc-table-entry p { margin: .25em 0; }
+
+/* Dungeon game-show chat: gold marquees, berry ink and cyan highlights. */
+.carl-card,
+.dcc-table-result {
+  --dcc-chat-gold: #ffcf45;
+  --dcc-chat-cyan: #83eff3;
+  --dcc-chat-ink: #271631;
+  background: radial-gradient(circle at top right, #63315e 0, transparent 65%), #271631;
+  color: #fff8e9;
+  border: 2px solid #ffcf45;
+  border-radius: 12px;
+  box-shadow: 0 3px 0 #b84d72;
+  padding: 13px 14px;
+  margin: 5px 0 9px;
+  font-family: Arial, sans-serif;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+}
+.carl-card small {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  padding: 3px 8px;
+  background: #ffcf45;
+  color: #271631;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1.5;
+}
+.carl-card h3 {
+  color: #ffdf70;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 9px 0;
+  padding: 0 0 7px;
+  border-bottom: 2px solid #ae577b;
+  text-shadow: 0 2px 0 #171020;
+}
+.carl-card > b { color: #83eff3; font-size: 16px; }
+.carl-card p,
+.dcc-table-entry p { font-size: 13px; margin: 6px 0; }
+.dcc-table-number {
+  width: fit-content;
+  min-width: 48px;
+  margin: 0 auto 10px;
+  padding: 2px 12px;
+  background: #ffcf45;
+  color: #271631;
+  border: 2px solid #fff0ae;
+  border-radius: 10px;
+  font-size: 27px;
+  font-weight: 900;
+  box-shadow: 0 3px 0 #b84d72;
+}
+.dcc-table-entry + .dcc-table-entry { border-top: 1px solid #ae577b; padding-top: 10px; }
+.dcc-table-entry > strong { display: block; color: #ffdf70; font-size: 17px; line-height: 1.3; margin-bottom: 7px; }
+.dcc-table-entry p strong { color: #83eff3; }
+.carl-card a,
+.dcc-table-result a.content-link {
+  color: #271631;
+  background: #83eff3;
+  border: 1px solid #c5fcff;
+  border-radius: 5px;
+  padding: 2px 5px;
+  white-space: normal;
+  text-decoration: none;
+}
+.dcc-table-result a.content-link:hover { background: #ffdf70; }
+.dcc-table-result a.content-link:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.chat-message:has(.carl-card) .dice-total,
+.chat-message:has(.dcc-table-result) .dice-total {
+  background: #ffcf45;
+  color: #271631;
+  border: 2px solid #b84d72;
+  border-radius: 9px;
+  font-weight: 900;
+}
+
+.dcc-import-items { white-space: nowrap; }
