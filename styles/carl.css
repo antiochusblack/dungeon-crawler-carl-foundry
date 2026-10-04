@@ -602,3 +602,16 @@
 }
 
 .dcc-import-items { white-space: nowrap; }
+
+/* Compact native Item disclosures; existing controls remain inside the body. */
+.carl details.item-disclosure { padding: 8px 10px; }
+.carl .item-disclosure > summary { cursor: pointer; align-items: center; gap: 6px; }
+.carl .item-disclosure > summary::before { content: "▸"; color: #ffce56; }
+.carl .item-disclosure[open] > summary::before { content: "▾"; }
+.carl .item-disclosure .entry-name { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.carl .item-disclosure .item-icon { flex: 0 0 28px; width: 28px; height: 28px; min-height: 28px; }
+.carl .item-disclosure .entry-body { padding-top: 6px; }
+.carl .item-disclosure > summary:focus-visible { outline: 2px solid #6de8f6; outline-offset: 3px; }
+
+.carl .rank-input { width: 55px; }
+.carl-card .roll-outcome { border-top: 1px solid #ae577b; padding-top: 8px; color: #83eff3; }

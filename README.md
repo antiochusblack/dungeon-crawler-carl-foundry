@@ -1,6 +1,6 @@
 # Dungeon Crawler Carl — unofficial Foundry prototype
 
-Version 0.4.3. Targets Foundry VTT 14. Includes the Crawler Starter Kit compendium: five original examples per Item type, organised into eight folders. Examples are custom sample content, not published rulebook entries.
+Version 0.4.4. Targets Foundry VTT 14. Includes the Crawler Starter Kit compendium: five original examples per Item type, organised into eight folders. Examples are custom sample content, not published rulebook entries.
 
 ## Sheets
 
@@ -48,3 +48,5 @@ The public system includes only the generic importer. Rulebook table data is dis
 ## Private Item imports
 
 As GM, use **Items → Import Items**, select the separate `DCC-Official-Items.json`, and confirm the count. The importer creates normal world Items in folders, ready to open, edit or drag onto Crawler sheets. Players have Observer access to imported Items. Repeat imports preserve existing Items and their edits; interrupted imports can be retried. The file is read locally. Official book content remains outside the public repository and ZIP.
+
+Item rows start collapsed. Expand the name to access details and Rank/quantity/equipment controls. Skill and Spell Ranks can be typed or adjusted with +/−; either change needs confirmation. Roll cards include unlocked Rank upgrades and outcome guidance; apply damage and conditional effects manually.

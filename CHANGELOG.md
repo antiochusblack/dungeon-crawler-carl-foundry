@@ -1,3 +1,9 @@
+# 0.4.4
+
+- Confirm Rank changes from +/− buttons and typed Rank values.
+- Show basic Skill/Spell effects, unlocked Rank upgrades and applicable outcome guidance in roll cards.
+- Make all eight embedded Item lists collapsible, with compact names, roll/use, edit and confirmed-removal controls. Keep expanded rows open during sheet refreshes.
+
 # 0.4.3
 
 - Add a release builder that always updates version, fixed manifest URL and matching download URL together, and verifies the packaged manifest matches the source.

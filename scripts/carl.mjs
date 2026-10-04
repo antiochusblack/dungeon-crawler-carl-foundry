@@ -1,3 +1,5 @@
+import { confirmRankChange } from "./rank-confirm.mjs";
+import { effectText, rollEffectsHTML } from "./roll-effects.mjs";
 import "./item-import.mjs";
 import "./table-chat.mjs";
 import "./table-import.mjs";
@@ -83,7 +85,7 @@ class CarlActor extends Actor {
         ),
     );
   }
-  async check(label, stat, rank = 0, untrained = false, extra = 0) {
+  async check(label, stat, rank = 0, untrained = false, extra = 0, item = null) {
     if (!this.isOwner) return;
     stat = statKey(stat);
     if (stat !== "none" && !this.system.stats[stat]) return ui.notifications.warn("Choose a standard Stat for this check; resolve custom Stat rules manually.");
@@ -105,10 +107,12 @@ class CarlActor extends Actor {
       `${die}+${mod}+${rank}+${num(s.roll.bonus) + extra}`,
     ).evaluate();
     const n = roll.dice[0].results.find((r) => r.active).result;
+    const outcome = degree(n, roll.total, s.roll.difficulty);
+    const effects = rollEffectsHTML(item, rank, outcome, {attack: item?.type === "weapon" || item?.system.checkType === "attack", evade: label === "Evade", floor: s.floor});
     await roll.toMessage(
       {
         speaker: ChatMessage.getSpeaker({ actor: this }),
-        flavor: `<div class="carl-card"><small>WORLD DUNGEON • SHOWTIME!</small><h3>${esc(label)}</h3><b>${degree(n, roll.total, s.roll.difficulty)}</b><p>Difficulty ${s.roll.difficulty} • ${esc(mode)} • Rank ${rank}</p></div>`,
+        flavor: `<div class="carl-card"><small>WORLD DUNGEON • SHOWTIME!</small><h3>${esc(label)}</h3><b>${outcome}</b><p>Difficulty ${s.roll.difficulty} • ${esc(mode)} • Rank ${rank}</p>${effects}</div>`,
       },
       { rollMode: game.settings.get("core", "rollMode") },
     );
@@ -405,14 +409,7 @@ const actions = {
   rank: async function (e, t) {
     if (this.isEditable) {
       const i = this.actor.items.get(t.dataset.id);
-      await i?.update({
-        "system.rank": adjustedResource(
-          i.system.rank,
-          num(t.dataset.delta),
-          0,
-          20,
-        ),
-      });
+      if(i) await confirmRankChange(i, adjustedResource(i.system.rank, num(t.dataset.delta), 0, 20));
     }
   },
   damage: async function (e, t) {
@@ -532,6 +529,7 @@ const actions = {
         stat,
         rank,
         rank === 0 && i.type !== "spell",
+        0, skill || i,
       );
       if (i.type !== "weapon") await i.update({ "system.used": true });
       else if (skill) await skill.update({ "system.used": true });
@@ -540,7 +538,7 @@ const actions = {
         this.actor,
         i.name,
         [
-          s.description,
+          effectText(skill || i, rank),
           s.range ? "Range: " + s.range : "",
           s.duration ? "Duration: " + s.duration : "",
           s.cooldown ? "Cooldown: " + s.cooldown : "",
@@ -767,6 +765,25 @@ class CarlSheet extends HandlebarsApplicationMixin(
   }
   _onRender(context, options) {
     super._onRender(context, options);
+    this.element.querySelectorAll("[data-rank-input]").forEach((input) => {
+      input.addEventListener("change", async (event) => {
+        event.stopPropagation();
+        const item = this.actor.items.get(input.dataset.id);
+        if (!item) return;
+        const requested = input.value;
+        input.value = item.system.rank;
+        if (this.isEditable) await confirmRankChange(item, requested);
+        input.value = item.system.rank;
+      });
+    });
+    this._expandedItems ??= new Set();
+    this.element.querySelectorAll("details.item-disclosure").forEach((entry) => {
+      entry.open = this._expandedItems.has(entry.dataset.itemId);
+      entry.addEventListener("toggle", () => {
+        if (entry.open) this._expandedItems.add(entry.dataset.itemId);
+        else this._expandedItems.delete(entry.dataset.itemId);
+      });
+    });
     this.element.querySelectorAll("[data-item-field]").forEach((input) =>
       input.addEventListener("change", async (event) => {
         event.stopPropagation();

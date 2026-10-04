@@ -102,32 +102,26 @@
 </section>
 <section class="tab {{tabs.abilities.cssClass}}" data-group="primary" data-tab="abilities">
 <h2>SKILL <button type="button" data-action="create" data-type="skill">+ ADD</button>
-</h2>{{#each groups}}{{#if (eq type "skill")}}{{#each items}}<article class="entry" data-item-id="{{id}}" draggable="true">
-<div class="entry-head">
-<button type="button" class="entry-name" data-action="use" data-id="{{id}}">{{name}}</button>
-<button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button>
-</div>
+</h2>{{#each groups}}{{#if (eq type "skill")}}{{#each items}}<details class="entry item-disclosure" data-item-id="{{id}}" draggable="true">
+<summary class="entry-head"><span class="entry-name">{{name}}</span><button type="button" class="item-icon" data-action="use" data-id="{{id}}" title="Roll {{name}}" aria-label="Roll {{name}}"><i class="fa-solid fa-dice-d20"></i></button><button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button></summary><div class="entry-body">
 <div class="entry-meta">
 <span>{{system.stat}} · {{#if system.passive}}Passive{{else}}{{system.checkType}}{{/if}}</span>
 <span class="rank-control">
-<button type="button" data-action="rank" data-id="{{id}}" data-delta="-1" aria-label="Decrease Rank">−</button> Rank {{system.rank}} <button type="button" data-action="rank" data-id="{{id}}" data-delta="1" aria-label="Increase Rank">+</button>
+<button type="button" data-action="rank" data-id="{{id}}" data-delta="-1" aria-label="Decrease Rank">−</button> Rank <input type="number" class="rank-input" data-rank-input data-id="{{id}}" value="{{system.rank}}" min="0" max="20" step="1" aria-label="Rank for {{name}}"> <button type="button" data-action="rank" data-id="{{id}}" data-delta="1" aria-label="Increase Rank">+</button>
 </span>{{#if isSpell}}<span>Mana {{effectiveMana}} · {{system.range}}</span>{{/if}}<button type="button" data-action="used" data-id="{{id}}">{{#if system.used}}✓ Used{{else}}Mark used{{/if}}</button>
 <button type="button" data-action="hotlist" data-id="{{id}}">{{#if system.hotlist}}★ Hotlist{{else}}+ Hotlist{{/if}}</button>{{#if hasDamage}}<button type="button" data-action="damage" data-id="{{id}}">{{system.damage}} {{system.damageType}}</button>{{/if}}</div>
 <p class="muted">{{system.limitations}}</p>
-</article>{{else}}<p class="muted">No skill entries yet.</p>{{/each}}{{/if}}{{/each}}<h2>SPELL <button type="button" data-action="create" data-type="spell">+ ADD</button>
-</h2>{{#each groups}}{{#if (eq type "spell")}}{{#each items}}<article class="entry" data-item-id="{{id}}" draggable="true">
-<div class="entry-head">
-<button type="button" class="entry-name" data-action="use" data-id="{{id}}">{{name}}</button>
-<button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button>
-</div>
+<p>{{system.description}}</p></div></details>{{else}}<p class="muted">No skill entries yet.</p>{{/each}}{{/if}}{{/each}}<h2>SPELL <button type="button" data-action="create" data-type="spell">+ ADD</button>
+</h2>{{#each groups}}{{#if (eq type "spell")}}{{#each items}}<details class="entry item-disclosure" data-item-id="{{id}}" draggable="true">
+<summary class="entry-head"><span class="entry-name">{{name}}</span><button type="button" class="item-icon" data-action="use" data-id="{{id}}" title="Cast {{name}}" aria-label="Cast {{name}}"><i class="fa-solid fa-wand-magic-sparkles"></i></button><button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button></summary><div class="entry-body">
 <div class="entry-meta">
 <span>{{system.stat}} · {{#if system.passive}}Passive{{else}}{{system.checkType}}{{/if}}</span>
 <span class="rank-control">
-<button type="button" data-action="rank" data-id="{{id}}" data-delta="-1" aria-label="Decrease Rank">−</button> Rank {{system.rank}} <button type="button" data-action="rank" data-id="{{id}}" data-delta="1" aria-label="Increase Rank">+</button>
+<button type="button" data-action="rank" data-id="{{id}}" data-delta="-1" aria-label="Decrease Rank">−</button> Rank <input type="number" class="rank-input" data-rank-input data-id="{{id}}" value="{{system.rank}}" min="0" max="20" step="1" aria-label="Rank for {{name}}"> <button type="button" data-action="rank" data-id="{{id}}" data-delta="1" aria-label="Increase Rank">+</button>
 </span>{{#if isSpell}}<span>Mana {{effectiveMana}} · {{system.range}}</span>{{/if}}<button type="button" data-action="used" data-id="{{id}}">{{#if system.used}}✓ Used{{else}}Mark used{{/if}}</button>
 <button type="button" data-action="hotlist" data-id="{{id}}">{{#if system.hotlist}}★ Hotlist{{else}}+ Hotlist{{/if}}</button>{{#if hasDamage}}<button type="button" data-action="damage" data-id="{{id}}">{{system.damage}} {{system.damageType}}</button>{{/if}}</div>
 <p class="muted">{{system.limitations}}</p>
-</article>{{else}}<p class="muted">No spell entries yet.</p>{{/each}}{{/if}}{{/each}}</section>
+<p>{{system.description}}</p></div></details>{{else}}<p class="muted">No spell entries yet.</p>{{/each}}{{/if}}{{/each}}</section>
 <section class="tab {{tabs.inventory.cssClass}}" data-group="primary" data-tab="inventory">{{#each inventoryWarnings}}<p class="warning">{{this}}</p>{{/each}}<h2>EQUIPPED GEAR</h2>
 <p class="muted">One item per clothing slot, one pair of gloves, and one item per hand. Two-handed gear occupies both holding slots.</p>
 <div class="paper-doll"><div class="doll-figure"><img src="systems/dungeon-crawler-carl/assets/crawler-doll.svg" alt="Crawler silhouette"></div>{{#each bodySlots}}<div class="gear-position slot-{{key}}">
@@ -152,11 +146,8 @@
 </label>
 </div>
 <h2>WEAPON <button type="button" data-action="create" data-type="weapon">+ ADD</button>
-</h2>{{#each groups}}{{#if (eq type "weapon")}}{{#each items}}<article class="entry" data-item-id="{{id}}" draggable="true">
-<div class="entry-head">
-<button type="button" class="entry-name" data-action="use" data-id="{{id}}">{{name}}</button>
-<button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button>
-</div>
+</h2>{{#each groups}}{{#if (eq type "weapon")}}{{#each items}}<details class="entry item-disclosure" data-item-id="{{id}}" draggable="true">
+<summary class="entry-head"><span class="entry-name">{{name}}</span><button type="button" class="item-icon" data-action="use" data-id="{{id}}" title="Roll {{name}}" aria-label="Roll {{name}}"><i class="fa-solid fa-dice-d20"></i></button><button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button></summary><div class="entry-body">
 <div class="entry-meta">
 <span><button type="button" data-action="quantity" data-id="{{id}}" data-delta="-1" aria-label="Reduce quantity">−</button> Quantity {{system.quantity}} <button type="button" data-action="quantity" data-id="{{id}}" data-delta="1" aria-label="Increase quantity">+</button></span>
 <span>{{slotLabel}}</span>
@@ -164,13 +155,10 @@
 </label>
 {{#if equipped}}<button type="button" class="store-icon" data-action="equip" data-id="{{id}}" title="Return to Inventory" aria-label="Return {{name}} to Inventory"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h5m8 0h5v10H3V11M3 11V7h5m8 0h5v4M12 2v11m-4-4 4 4 4-4"/></svg></button>{{else}}<button type="button" data-action="equip" data-id="{{id}}">Equip</button>{{/if}}
 <button type="button" data-action="hotlist" data-id="{{id}}">{{#if system.hotlist}}★ Hotlist{{else}}+ Hotlist{{/if}}</button>{{#if hasDamage}}<button type="button" data-action="damage" data-id="{{id}}">{{system.damage}} {{system.damageType}}</button>{{/if}}</div>
-<p class="muted">Weapon Skill: {{#if skillLabel}}{{skillLabel}}{{else}}Manual / legacy Rank {{system.rank}}{{/if}} · Range {{system.range}} · {{system.limitations}}</p>
-</article>{{else}}<p class="muted">No weapon entries yet.</p>{{/each}}{{/if}}{{/each}}<h2>GEAR <button type="button" data-action="create" data-type="gear">+ ADD</button>
-</h2>{{#each groups}}{{#if (eq type "gear")}}{{#each items}}<article class="entry" data-item-id="{{id}}" draggable="true">
-<div class="entry-head">
-<button type="button" class="entry-name" data-action="use" data-id="{{id}}">{{name}}</button>
-<button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button>
-</div>
+<p class="muted">Weapon Skill: {{#if skillLabel}}{{skillLabel}}{{else}}Manual / legacy Rank <input type="number" class="rank-input" data-rank-input data-id="{{id}}" value="{{system.rank}}" min="0" max="20" step="1" aria-label="Rank for {{name}}">{{/if}} · Range {{system.range}} · {{system.limitations}}</p>
+<p>{{system.description}}</p></div></details>{{else}}<p class="muted">No weapon entries yet.</p>{{/each}}{{/if}}{{/each}}<h2>GEAR <button type="button" data-action="create" data-type="gear">+ ADD</button>
+</h2>{{#each groups}}{{#if (eq type "gear")}}{{#each items}}<details class="entry item-disclosure" data-item-id="{{id}}" draggable="true">
+<summary class="entry-head"><span class="entry-name">{{name}}</span><button type="button" class="item-icon" data-action="use" data-id="{{id}}" title="Use {{name}}" aria-label="Use {{name}}"><i class="fa-solid fa-dice-d20"></i></button><button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button></summary><div class="entry-body">
 <div class="entry-meta">
 <span><button type="button" data-action="quantity" data-id="{{id}}" data-delta="-1" aria-label="Reduce quantity">−</button> Quantity {{system.quantity}} <button type="button" data-action="quantity" data-id="{{id}}" data-delta="1" aria-label="Increase quantity">+</button></span>
 <span>{{slotLabel}}</span>
@@ -178,7 +166,7 @@
 </label>
 {{#if equipped}}<button type="button" class="store-icon" data-action="equip" data-id="{{id}}" title="Return to Inventory" aria-label="Return {{name}} to Inventory"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h5m8 0h5v10H3V11M3 11V7h5m8 0h5v4M12 2v11m-4-4 4 4 4-4"/></svg></button>{{else}}<button type="button" data-action="equip" data-id="{{id}}">Equip</button>{{/if}}
 <button type="button" data-action="hotlist" data-id="{{id}}">{{#if system.hotlist}}★ Hotlist{{else}}+ Hotlist{{/if}}</button>{{#if hasDamage}}<button type="button" data-action="damage" data-id="{{id}}">{{system.damage}} {{system.damageType}}</button>{{/if}}</div>
-</article>{{else}}<p class="muted">No gear entries yet.</p>{{/each}}{{/if}}{{/each}}</section>
+<p>{{system.description}}</p></div></details>{{else}}<p class="muted">No gear entries yet.</p>{{/each}}{{/if}}{{/each}}</section>
 <section class="tab {{tabs.identity.cssClass}}" data-group="primary" data-tab="identity">
 <h2>CRAWLER RECORD</h2>
 <div class="grid">
@@ -192,21 +180,15 @@
 </label>
 </div>
 <h2>RACE <button type="button" data-action="create" data-type="race">+ ADD</button>
-</h2>{{#each groups}}{{#if (eq type "race")}}{{#each items}}<article class="entry" data-item-id="{{id}}" draggable="true">
-<div class="entry-head">
-<button type="button" class="entry-name" data-action="use" data-id="{{id}}">{{name}}</button>
-<button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button>
-</div>
+</h2>{{#each groups}}{{#if (eq type "race")}}{{#each items}}<details class="entry item-disclosure" data-item-id="{{id}}" draggable="true">
+<summary class="entry-head"><span class="entry-name">{{name}}</span><button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button></summary><div class="entry-body">
 <p>{{system.benefits}}</p>
-</article>{{else}}<p class="muted">No race entries yet.</p>{{/each}}{{/if}}{{/each}}<h2>CLASS <button type="button" data-action="create" data-type="class">+ ADD</button>
-</h2>{{#each groups}}{{#if (eq type "class")}}{{#each items}}<article class="entry" data-item-id="{{id}}" draggable="true">
-<div class="entry-head">
-<button type="button" class="entry-name" data-action="use" data-id="{{id}}">{{name}}</button>
-<button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button>
-</div>
+</div></details>{{else}}<p class="muted">No race entries yet.</p>{{/each}}{{/if}}{{/each}}<h2>CLASS <button type="button" data-action="create" data-type="class">+ ADD</button>
+</h2>{{#each groups}}{{#if (eq type "class")}}{{#each items}}<details class="entry item-disclosure" data-item-id="{{id}}" draggable="true">
+<summary class="entry-head"><span class="entry-name">{{name}}</span><button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button></summary><div class="entry-body">
 <p>{{system.benefits}}</p>
-</article>{{else}}<p class="muted">No class entries yet.</p>{{/each}}{{/if}}{{/each}}<h2>ABILITIES <button type="button" data-action="create" data-type="ability">+ ADD</button></h2>
-{{#each groups}}{{#if (eq type "ability")}}{{#each items}}<article class="entry" data-item-id="{{id}}" draggable="true"><div class="entry-head"><button type="button" class="entry-name" data-action="edit" data-id="{{id}}">{{name}}</button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button></div><p>{{system.description}}</p><small>{{system.source}}</small></article>{{else}}<p class="muted">No abilities yet.</p>{{/each}}{{/if}}{{/each}}
+</div></details>{{else}}<p class="muted">No class entries yet.</p>{{/each}}{{/if}}{{/each}}<h2>ABILITIES <button type="button" data-action="create" data-type="ability">+ ADD</button></h2>
+{{#each groups}}{{#if (eq type "ability")}}{{#each items}}<details class="entry item-disclosure" data-item-id="{{id}}" draggable="true"><summary class="entry-head"><span class="entry-name">{{name}}</span><button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button></summary><div class="entry-body"><p>{{system.description}}</p><small>{{system.source}}</small></div></details>{{else}}<p class="muted">No abilities yet.</p>{{/each}}{{/if}}{{/each}}
 <div class="two-grid">
 <label class="wide">Past trauma<textarea name="system.pastTrauma">{{system.pastTrauma}}</textarea>
 </label>
@@ -218,15 +200,12 @@
 </section>
 <section class="tab {{tabs.achievements.cssClass}}" data-group="primary" data-tab="achievements">
 <h2>ACHIEVEMENT <button type="button" data-action="create" data-type="achievement">+ ADD</button>
-</h2>{{#each groups}}{{#if (eq type "achievement")}}{{#each items}}<article class="entry" data-item-id="{{id}}" draggable="true">
-<div class="entry-head">
-<button type="button" class="entry-name" data-action="use" data-id="{{id}}">{{name}}</button>
-<button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button>
-</div>
+</h2>{{#each groups}}{{#if (eq type "achievement")}}{{#each items}}<details class="entry item-disclosure" data-item-id="{{id}}" draggable="true">
+<summary class="entry-head"><span class="entry-name">{{name}}</span><button type="button" class="item-icon" data-action="edit" data-id="{{id}}" title="Edit {{name}}" aria-label="Edit {{name}}"><i class="fa-solid fa-pen"></i></button><button type="button" class="item-icon" data-action="remove" data-id="{{id}}" title="Remove {{name}} from character" aria-label="Remove {{name}} from character"><i class="fa-solid fa-trash"></i></button></summary><div class="entry-body">
 <p>{{system.description}}</p>
 <p class="reward">Reward: {{system.reward}}</p>
 <small>{{system.awardedOn}}</small>
-</article>{{else}}<p class="muted">No achievement entries yet.</p>{{/each}}{{/if}}{{/each}}</section>
+</div></details>{{else}}<p class="muted">No achievement entries yet.</p>{{/each}}{{/if}}{{/each}}</section>
 <section class="tab {{tabs.notes.cssClass}}" data-group="primary" data-tab="notes">
 <h2>STATUS & DEFENCES</h2>
 <div class="two-grid">
