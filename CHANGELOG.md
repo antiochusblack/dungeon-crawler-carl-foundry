@@ -1,3 +1,17 @@
+# 0.4.3
+
+- Add a release builder that always updates version, fixed manifest URL and matching download URL together, and verifies the packaged manifest matches the source.
+- Carry forward all v0.4.2 Item import, table and chat-theme changes.
+
+# 0.4.2
+
+- Add a GM-only Import Items sidebar button for separate private JSON bundles, organised folders and normal draggable world Items.
+
+- Give system chat cards a bright dungeon game-show theme: gold marquees, berry backgrounds, cyan links and bold dice totals.
+- Rebuild the separate private tables file with clean entry names and effect descriptions. Chat cards display these fields directly, without rewriting table rows.
+- Offer explicit confirmation to replace older imported table revisions; preserve existing edits when declined.
+- Make subtable links in these chat cards roll the linked table on click. Existing imported tables are supported.
+
 # 0.4.1
 
 - Add a GM-only Import Tables button to the RollTables sidebar for separate private JSON bundles.

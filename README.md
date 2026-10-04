@@ -1,6 +1,6 @@
 # Dungeon Crawler Carl — unofficial Foundry prototype
 
-Version 0.4.1. Targets Foundry VTT 14. Includes the Crawler Starter Kit compendium: five original examples per Item type, organised into eight folders. Examples are custom sample content, not published rulebook entries.
+Version 0.4.3. Targets Foundry VTT 14. Includes the Crawler Starter Kit compendium: five original examples per Item type, organised into eight folders. Examples are custom sample content, not published rulebook entries.
 
 ## Sheets
 
@@ -41,6 +41,10 @@ Core Rulebook: Stats/checks pp. 56–61; actions/combat pp. 64, 79–86; Health,
 
 ## Private table imports
 
-As GM, open the RollTables sidebar and click **Import Tables**. Select your separate `DCC-Rulebook-Tables.json` file, click **Read File**, then review the counts and choose **Import**. Tables are created as normal world RollTables in chapter folders, with working subtable links. Reimporting the same bundle keeps existing tables and their edits; a interrupted import can be retried. The file is read locally, with no external upload.
+As GM, open the RollTables sidebar and click **Import Tables**. Select your separate `DCC-Rulebook-Tables.json` file, click **Read File**, then review the counts and choose **Import**. Tables are created as normal world RollTables in chapter folders, with working subtable links. Reimporting the same revision keeps existing tables and their edits; an interrupted import can be retried. A corrected file revision offers a separate Replace Tables confirmation for older matching tables. Cancel keeps your edits. The file is read locally, with no external upload.
 
 The public system includes only the generic importer. Rulebook table data is distributed separately and must not be committed or included in the public release package.
+
+## Private Item imports
+
+As GM, use **Items → Import Items**, select the separate `DCC-Official-Items.json`, and confirm the count. The importer creates normal world Items in folders, ready to open, edit or drag onto Crawler sheets. Players have Observer access to imported Items. Repeat imports preserve existing Items and their edits; interrupted imports can be retried. The file is read locally. Official book content remains outside the public repository and ZIP.

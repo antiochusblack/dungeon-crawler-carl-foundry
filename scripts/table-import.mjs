@@ -78,13 +78,14 @@ export async function importTableBundle(input) {
     for(const t of data.tables){const old=game.tables.get(t._id);if(old&&!ours(old))throw new Error('An unrelated table uses a required ID. No changes were made.');}
     const folders=data.folders.filter(f=>!game.folders.has(f._id));
     const tables=data.tables.filter(t=>!game.tables.has(t._id));
-    if(!folders.length&&!tables.length){ui.notifications.info('These tables are already installed. Your edits were preserved.');return {created:0,skipped:data.tables.length};}
+    const updates=Number.isSafeInteger(data.revision)&&data.revision>0 ? data.tables.filter(t=>{const old=game.tables.get(t._id);return old&&ours(old)&&(old.flags?.[NS]?.tableImportRevision??0)<data.revision;}) : [];
+    if(!folders.length&&!tables.length&&!updates.length){ui.notifications.info('These tables are already installed. Your edits were preserved.');return {created:0,skipped:data.tables.length};}
     const proceed=await foundry.applications.api.DialogV2.confirm({
-      window:{title:'Import Tables'},content:`<p>Import <strong>${tables.length}</strong> new tables into <strong>${folders.length}</strong> new folders?</p><p>${data.tables.length-tables.length} existing tables will be kept, including your edits.</p>`,
+      window:{title:'Import Tables'},content:`<p>Import <strong>${tables.length}</strong> new tables into <strong>${folders.length}</strong> new folders?</p><p>${updates.length} matching tables have an older file revision. After creating new tables, you can separately choose whether to replace those tables. Other existing tables and edits will be kept.</p>`,
       yes:{label:'Import',default:false},no:{label:'Cancel',default:true},modal:true,rejectClose:false,
     });
     if(proceed!==true)return {created:0,cancelled:true};
-    const stamp=doc=>{doc.flags??={};doc.flags[NS]??={};doc.flags[NS].tableImportBundle=data.bundleId;return doc;};
+    const stamp=doc=>{doc.flags??={};doc.flags[NS]??={};doc.flags[NS].tableImportBundle=data.bundleId;if(data.revision)doc.flags[NS].tableImportRevision=data.revision;return doc;};
     for(const folder of folders)await Folder.create(stamp(folder),{keepId:true});
     let created=0;
     for(let offset=0;offset<tables.length;offset+=10){
@@ -94,8 +95,12 @@ export async function importTableBundle(input) {
       created+=docs.length;
     }
     if(data.tables.some(t=>!game.tables.has(t._id)))throw new Error('Some tables are missing. Run the import again to resume.');
-    ui.notifications.info(`Imported ${created} tables. Existing tables were preserved.`);
-    return {created,skipped:data.tables.length-tables.length};
+    let updated=0;
+    if(updates.length && await foundry.applications.api.DialogV2.confirm({window:{title:'Update Imported Tables?'},content:`<p>Replace <strong>${updates.length}</strong> previously imported tables with the corrected entries from this file?</p><p>This replaces their names, descriptions and results, including your edits to those fields. Choose Cancel to keep them.</p>`,yes:{label:'Replace Tables',default:false},no:{label:'Cancel',default:true},modal:true,rejectClose:false})===true){
+      for(let offset=0;offset<updates.length;offset+=10){const batch=updates.slice(offset,offset+10).map(t=>{const old=game.tables.get(t._id);const doc=stamp(t);doc.flags={...old.flags,...doc.flags,[NS]:{...old.flags?.[NS],...doc.flags[NS]}};return doc;});await RollTable.updateDocuments(batch);updated+=batch.length;}
+    }
+    ui.notifications.info(`Imported ${created} tables; updated ${updated}. Other existing tables were preserved.`);
+    return {created,updated,skipped:data.tables.length-tables.length-updated};
   } finally { importing=false; }
 }
 

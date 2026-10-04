@@ -146,19 +146,6 @@
 .carl input[type="checkbox"] {
   width: 22px;
 }
-.carl-card {
-  background: #121c25;
-  color: #edf6f9;
-  padding: 14px;
-  border-left: 4px solid #ffce56;
-}
-.carl-card h3 {
-  color: #ffce56;
-  margin: 8px 0;
-}
-.carl-card p {
-  font-size: 12px;
-}
 .carl .tab[data-tab="achievements"] .item-row {
   border: 1px solid #776532;
   background: #302919;
@@ -529,3 +516,89 @@
 .carl .item-icon { flex: 0 0 auto; width: 28px; min-width: 28px; padding: 2px; }
 
 .dcc-import-tables { white-space: nowrap; }
+
+.dcc-table-number { font-size: 1.6em; font-weight: bold; text-align: center; }
+.dcc-table-entry { margin: .5em 0; }
+.dcc-table-entry p { margin: .25em 0; }
+
+/* Dungeon game-show chat: gold marquees, berry ink and cyan highlights. */
+.carl-card,
+.dcc-table-result {
+  --dcc-chat-gold: #ffcf45;
+  --dcc-chat-cyan: #83eff3;
+  --dcc-chat-ink: #271631;
+  background: radial-gradient(circle at top right, #63315e 0, transparent 65%), #271631;
+  color: #fff8e9;
+  border: 2px solid #ffcf45;
+  border-radius: 12px;
+  box-shadow: 0 3px 0 #b84d72;
+  padding: 13px 14px;
+  margin: 5px 0 9px;
+  font-family: Arial, sans-serif;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+}
+.carl-card small {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  padding: 3px 8px;
+  background: #ffcf45;
+  color: #271631;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1.5;
+}
+.carl-card h3 {
+  color: #ffdf70;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 9px 0;
+  padding: 0 0 7px;
+  border-bottom: 2px solid #ae577b;
+  text-shadow: 0 2px 0 #171020;
+}
+.carl-card > b { color: #83eff3; font-size: 16px; }
+.carl-card p,
+.dcc-table-entry p { font-size: 13px; margin: 6px 0; }
+.dcc-table-number {
+  width: fit-content;
+  min-width: 48px;
+  margin: 0 auto 10px;
+  padding: 2px 12px;
+  background: #ffcf45;
+  color: #271631;
+  border: 2px solid #fff0ae;
+  border-radius: 10px;
+  font-size: 27px;
+  font-weight: 900;
+  box-shadow: 0 3px 0 #b84d72;
+}
+.dcc-table-entry + .dcc-table-entry { border-top: 1px solid #ae577b; padding-top: 10px; }
+.dcc-table-entry > strong { display: block; color: #ffdf70; font-size: 17px; line-height: 1.3; margin-bottom: 7px; }
+.dcc-table-entry p strong { color: #83eff3; }
+.carl-card a,
+.dcc-table-result a.content-link {
+  color: #271631;
+  background: #83eff3;
+  border: 1px solid #c5fcff;
+  border-radius: 5px;
+  padding: 2px 5px;
+  white-space: normal;
+  text-decoration: none;
+}
+.dcc-table-result a.content-link:hover { background: #ffdf70; }
+.dcc-table-result a.content-link:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.chat-message:has(.carl-card) .dice-total,
+.chat-message:has(.dcc-table-result) .dice-total {
+  background: #ffcf45;
+  color: #271631;
+  border: 2px solid #b84d72;
+  border-radius: 9px;
+  font-weight: 900;
+}
+
+.dcc-import-items { white-space: nowrap; }

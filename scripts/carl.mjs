@@ -1,3 +1,5 @@
+import "./item-import.mjs";
+import "./table-chat.mjs";
 import "./table-import.mjs";
 import { ITEM_TEXT_FIELDS, statKey, linkedSkill } from "./item-fields.mjs";
 import { statMod, degree } from "./math.mjs";
@@ -106,7 +108,7 @@ class CarlActor extends Actor {
     await roll.toMessage(
       {
         speaker: ChatMessage.getSpeaker({ actor: this }),
-        flavor: `<div class="carl-card"><small>WORLD DUNGEON // CHECK</small><h3>${esc(label)}</h3><b>${degree(n, roll.total, s.roll.difficulty)}</b><p>Difficulty ${s.roll.difficulty} • ${esc(mode)} • Rank ${rank}</p></div>`,
+        flavor: `<div class="carl-card"><small>WORLD DUNGEON • SHOWTIME!</small><h3>${esc(label)}</h3><b>${degree(n, roll.total, s.roll.difficulty)}</b><p>Difficulty ${s.roll.difficulty} • ${esc(mode)} • Rank ${rank}</p></div>`,
       },
       { rollMode: game.settings.get("core", "rollMode") },
     );
@@ -427,7 +429,7 @@ const actions = {
       ).toMessage(
         {
           speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-          flavor: `<div class="carl-card"><h3>${esc(i.name)} — ${esc(i.system.damageType || "Damage")}</h3></div>`,
+          flavor: `<div class="carl-card"><small>WORLD DUNGEON • DAMAGE!</small><h3>${esc(i.name)} — ${esc(i.system.damageType || "Damage")}</h3></div>`,
         },
         { rollMode: game.settings.get("core", "rollMode") },
       );
